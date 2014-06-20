@@ -1,0 +1,90 @@
+﻿@model IEnumerable<XMLManipulatorEngine.RssDataModel.RSSFeedItem>
+@{
+    ViewBag.Title = "Home Page";
+}
+<script type="text/javascript">
+    
+    var formatUTCDate = function (date) {
+        //format: 20/06/2014 14:10:24
+        var d = date.split(RegExp(/\/|:| /));
+        var str = Date.UTC(d[2], d[1], d[0], d[3], d[4], d[5]);
+        debugger;
+        return str;
+    }
+
+    $(document).ready(function() {
+        $('#vote').click(function () {
+            var votes = [];
+            $(':checkbox:checked').each(function () {
+                var id = $(this).attr('id');
+                var tit = $('td#tit_' + id).html();
+                var des = $('td#des_' + id).html();
+                var lnk = $('td#lnk_' + id).html();
+                var pdt = "\/Date(" + formatUTCDate($('td#pdt_' + id).html()) + ")\/";
+
+                votes.push({ Title: tit, Description: des, Link: lnk, FriendlyID: id, PublishDate: pdt } );
+            });
+            var actualData = { feeds: votes };
+            var jsonVotes = JSON.stringify(actualData);
+
+            debugger;
+            $.ajax({
+                url: "http://localhost:1430/VotingService/VotingService.svc/AddVotes",
+                data: jsonVotes,
+                contentType: 'application/json',
+                type:"POST",
+                success: function(data) {
+                    $.ajax({
+                        url: "http://localhost:1430/VotingService/VotingService.svc/GetCurrentXml",
+                        dataType: "xml",
+                        success:function(data) {
+                            alert("successfully updated Data Store");
+                        },
+                        error: function (data) {
+                            debugger;
+                            alert(data);
+                        }
+                    });
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<style type="text/css">
+    table, th, td {border: 2px solid gray;}
+    th, td{padding:7px;}
+    #vote{margin-right:5px;width:150px;color:white;font-weight:bolder;background:blue;float:right;}
+</style>
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div>
+        <h2>Getting started</h2>
+        <p>
+            Vote for a feed by checking the box by the feed and click vote button.
+        </p>
+    </div>
+    @using (Html.BeginForm())
+          {
+              <div>      
+                  <table>
+                      <tr><th>Feed Title</th><th>Feed Description</th><th>Link</th><th>Date Published</th><th>Vote</th></tr>
+                      @foreach (var item in Model)
+                      {
+                          <tr><td id="tit_@item.FriendlyID">@item.Title</td><td id="des_@item.FriendlyID">@item.Description</td><td id="lnk_@item.FriendlyID"> <a href="@item.Link">@item.Link</a></td><td id="pdt_@item.FriendlyID">@item.PublishDate</td><td>@Html.CheckBox(item.FriendlyID, new { @id = item.FriendlyID })</td></tr>
+                      }
+                  </table>
+                  <p>
+                      <input type="button" id="vote" name="Vote" value="Vote"/>
+                  </p>
+              </div>
+          }
+</div>

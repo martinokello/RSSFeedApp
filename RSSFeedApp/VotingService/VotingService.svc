@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="RSSFeedApp.VotingService.VotingService" CodeBehind="VotingService.svc.cs" %>
