@@ -24,6 +24,11 @@
 
                 votes.push({ Title: tit, Description: des, Link: lnk, FriendlyID: id, PublishDate: pdt } );
             });
+
+            if (votes.length == 0) {
+                alert("You need to vote!");
+                return false;
+            }
             var actualData = { feeds: votes };
             var jsonVotes = JSON.stringify(actualData);
 
