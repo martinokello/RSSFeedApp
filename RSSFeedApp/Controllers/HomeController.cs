@@ -15,6 +15,7 @@ namespace RSSFeedApp.Controllers
 
             var rssFeedUrl = ConfigurationManager.AppSettings["RssFeedUrl"];
             var items = xmlManipulator.GetRssFeedsObjects(rssFeedUrl);
+            ViewBag.Title = items.Any() ? items[0].ChannelTitle : "Home Page";
             return View(items);
         }
 
