@@ -17,7 +17,7 @@ namespace XMLManipulatorEngine
 {
     public class XMLManipulator
     {
-        public static readonly object lockObject = new object();
+        private static readonly object lockObject = new object();
 
         public RSSFeedItem[] GetRssFeedsObjects(string rssFeedUrl)
         {
