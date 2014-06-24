@@ -2,4 +2,3 @@ C:\C#Projects\RSSFeedApp\XMLManipulatorEngine\bin\Debug\XMLManipulatorEngine.dll
 C:\C#Projects\RSSFeedApp\XMLManipulatorEngine\bin\Debug\XMLManipulatorEngine.pdb
 C:\C#Projects\RSSFeedApp\XMLManipulatorEngine\obj\Debug\XMLManipulatorEngine.dll
 C:\C#Projects\RSSFeedApp\XMLManipulatorEngine\obj\Debug\XMLManipulatorEngine.pdb
-C:\C#Projects\RSSFeedApp\XMLManipulatorEngine\obj\Debug\XMLManipulatorEngine.csprojResolveAssemblyReference.cache

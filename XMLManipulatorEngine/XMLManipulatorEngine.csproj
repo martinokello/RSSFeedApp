@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IXmlServices.cs" />
     <Compile Include="RssDataModel\RSSFeedItem.cs" />
     <Compile Include="XMLManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

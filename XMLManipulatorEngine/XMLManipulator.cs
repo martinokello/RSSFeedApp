@@ -11,11 +11,12 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Net;
+using XMLManipulatorEngine.Interfaces;
 using XMLManipulatorEngine.RssDataModel;
 
 namespace XMLManipulatorEngine
 {
-    public class XMLManipulator
+    public class XMLManipulator : IXmlServices
     {
         private static readonly object lockObject = new object();
 
