@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
+
 namespace XMLManipulatorEngine.RssDataModel
 {
     [DataContract]
@@ -28,7 +30,13 @@ namespace XMLManipulatorEngine.RssDataModel
         public string FriendlyID
         {
             get { return _friendlyId; }
-            set { _friendlyId = value.Replace(" ", String.Empty).Replace("'", String.Empty).Replace(".",string.Empty).Replace("#",string.Empty).Replace(":",string.Empty).Replace("?",string.Empty).Replace(";",string.Empty); }
+            set
+            {
+                var pattern = @"('| |:|;|#|£|\$|\.|\?|"")";
+                var regEx = new Regex(pattern);
+                var result = regEx.Replace(value, "");
+                _friendlyId = result;
+            }
         }
     }
 }
