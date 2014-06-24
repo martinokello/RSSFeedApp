@@ -16,7 +16,7 @@
                 var id = $(this).attr('id');
                 var tit = $('td#tit_' + id).html();
                 var des = $('td#des_' + id).html();
-                var lnk = $('td#lnk_' + id).html();
+                var lnk = $('td#lnk_' + id +" a").html();
                 var pdt = "\/Date(" + formatUTCDate($('td#pdt_' + id).html()) + ")\/";
 
                 votes.push({ Title: tit, Description: des, Link: lnk, FriendlyID: id, PublishDate: pdt } );
@@ -35,12 +35,12 @@
                 data: jsonVotes,
                 contentType: 'application/json',
                 type:"POST",
-                success: function(data) {
+                success: function (data) {
+                    alert("successfully updated Data Store");
                     $.ajax({
                         url: "http://localhost:1430/VotingService/VotingService.svc/GetCurrentXml",
                         dataType: "xml",
                         success:function(data) {
-                            alert("successfully updated Data Store");
                         },
                         error: function (data) {
                             debugger;
